@@ -90,28 +90,4 @@ public class Classe implements Component {
     public void mostrarComponent() {
         System.out.println("\nLa classe " + nom + " té una capacitat de "+capacitat);
     }
-    
-    public Object demanarDades(String peticio, int tipus) {      
-        Object item = new Object();
-        
-        System.out.println(peticio);
-
-        switch (tipus){
-            case 1:
-                item = DADES.nextInt();
-                break;
-            case 2:
-                item = DADES.next();
-                break;
-            case 3:
-                item = DADES.nextDouble();
-                break;
-            case 4:
-                item = DADES.nextLine();
-                break;
-        }
-        
-        return item;                
-    }
-    
 }

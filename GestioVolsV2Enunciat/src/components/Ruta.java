@@ -5,11 +5,15 @@
  */
 package components;
 
+import java.util.Scanner;
+
 /**
  *
  * @author DieCM
  */
 public abstract class Ruta implements Component {
+    
+    static final Scanner DADES = new Scanner(System.in);
     
     public String codi;
     public String aeroportOri;

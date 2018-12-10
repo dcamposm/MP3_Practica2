@@ -90,27 +90,4 @@ public class RutaNacional extends Ruta {
         super.mostrarComponent();
         System.out.println("\nPaís: " + pais);
     }
-    
-    public Object demanarDades(String peticio, int tipus) {      
-        Object item = new Object();
-        
-        System.out.println(peticio);
-
-        switch (tipus){
-            case 1:
-                item = DADES.nextInt();
-                break;
-            case 2:
-                item = DADES.next();
-                break;
-            case 3:
-                item = DADES.nextDouble();
-                break;
-            case 4:
-                item = DADES.nextLine();
-                break;
-        }
-        
-        return item;                
-    }
 }
