@@ -141,14 +141,14 @@ public class Aplicacio {
                 case 3:
                     pos = selectCompanyia();
                     if (pos >= 0) {
-                        companyies[pos].modificarCompanyia();
+                        companyies[pos].modificarComponent();
                     } else {
                         System.out.println("\nNo existeix aquesta companyia");
                     }
                     break;
                 case 4:
                     for (int i = 0; i < posicioCompanyies; i++) {
-                        companyies[i].mostrarCompanyia();
+                        companyies[i].mostrarComponent();
                     }
                     break;
                 default:
@@ -201,11 +201,14 @@ public class Aplicacio {
                         break;
                     case 2:
                         int pos;
+                        if (tipus==1){
+                            pos = companyiaActual.seleccionarComponent(1, "codi");
+                        }
                         if (tipus<6){
-                            pos = companyiaActual.seleccionarComponent(tipus, "codi");
+                            pos = companyiaActual.seleccionarComponent(2, "codi");
                         }
                         else {
-                            pos = companyiaActual.seleccionarComponent(tipus, "passaport");
+                            pos = companyiaActual.seleccionarComponent(3, "passaport");
                         }
                         
                         if (pos >= 0) {
@@ -233,9 +236,8 @@ public class Aplicacio {
             System.out.println("\n2. Modificar");
             System.out.println("\n3. Afegir avió");
             System.out.println("\n4. Afegir ruta");
-            System.out.println("\n5. Afegir tripulant de cabina");
-            System.out.println("\n6. Afegir tripulant de cabina de passatgers");
-            System.out.println("\n7. Llistar vols");
+            System.out.println("\n5. Afegir tripulant");
+            System.out.println("\n6. Llistar vols");
 
             opcio = DADES.nextInt();
 
@@ -246,9 +248,9 @@ public class Aplicacio {
                     companyiaActual.afegirVol();
                     break;
                 case 2:
-                    int pos = companyiaActual.seleccionarVol();
+                    int pos = companyiaActual.seleccionarComponent(4, "codi");
                     if (pos >= 0) {
-                        companyiaActual.getVols()[pos].modificarVol();
+                        companyiaActual.getComponent()[pos].modificarComponent();
                     } else {
                         System.out.println("\nNo existeix aquest vol");
                     }
@@ -257,24 +259,28 @@ public class Aplicacio {
                     companyiaActual.afegirAvioVol();
                     break;
                 case 4:
-                    int tipus;
-                    System.out.println("\nQuin tipus de ruta vols afegir? (1:nacional, 2:internacional, 3:intercontinental, 4:transoceànica");
-                    tipus = DADES.nextInt();
-                    if (tipus >= 1 && tipus >= 4) {
-                        companyiaActual.afegirRutaVol(tipus);
+                    int tipusRuta;
+                    System.out.println("\nQuin tipus de ruta vols afegir? (2:nacional, 3:internacional, 4:intercontinental, 5:transoceànica)");
+                    tipusRuta = DADES.nextInt();
+                    if (tipusRuta >= 2 && tipusRuta <= 5) {
+                        companyiaActual.afegirRutaVol(tipusRuta);
                     } else {
                         System.out.println("\nEl tipus de ruta no és correcte");
                     }
                     break;
                 case 5:
-                    companyiaActual.afegirTripulantCabinaVol();
+                    int tipusTri;
+                    System.out.println("\nQuin tipus de tripulants vols afegir? (6:Cabina, 7:TCP)");
+                    tipusTri = DADES.nextInt();
+                    if (tipusTri >= 6 && tipusTri <= 7) {
+                        companyiaActual.afegirTripulantVol(tipusTri);
+                    } else {
+                        System.out.println("\nEl tipus de tripulant no és correcte");
+                    }
                     break;
                 case 6:
-                    companyiaActual.afegirTCPVol();
-                    break;
-                case 7:
                     for (int i = 0; i < companyiaActual.getPosicioVols(); i++) {
-                        companyiaActual.getVols()[i].mostrarVol();
+                        companyiaActual.getComponent()[i].mostrarComponent();
                     }
                     break;
                 default:
@@ -286,12 +292,6 @@ public class Aplicacio {
         }
     }
     
-    public static void menuVols() throws ParseException {
-        int opcio = 0;
-
-        
-    }
-
     public static Integer selectCompanyia() {
 
         System.out.println("\nCodi de la companyia?:");
