@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author DieCM
+ * @author Albert
  */
 public interface Component {
     
@@ -20,26 +20,26 @@ public interface Component {
     
     public void modificarComponent() throws ParseException;
     
-    Object demanarDades(String peticio, int tipus);
-    /*default Object demanarDades(String peticio, int tipus){
+    default Object demanarDades(String peticio, int tipus) {
+        
         Object item = new Object();
         
-        System.out.println(peticio);
-
-        switch (tipus){
-            case 1:
-                item = DADES.nextInt();
-                break;
-            case 2:
-                item = DADES.next();
-                break;
-            case 3:
-                item = DADES.nextDouble();
-                break;
-            case 4:
-                item = DADES.nextLine();
-                break;
+        System.out.print(peticio);
+        
+        switch (tipus) {
+            case 1: item = DADES.nextInt();
+            break;
+            case 2: item = DADES.next();
+            break;
+            case 3: item = DADES.nextDouble();
+            break;
+            case 4: item = DADES.nextLine();
+            break;
         }
-    }*/
-    
+        
+        return item;
+        
+    }
+        
+        
 }
