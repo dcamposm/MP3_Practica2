@@ -269,8 +269,8 @@ public class Vol implements Component{
             i = (String)demanarDades("Vols que aquet tripulant sigui cap de cabina? (S/N)",2);
             if (i.equals("S")){
                 tripulant.setRang("cap");
-                cap=tripulant;
-                tripulacio[posicioTripulacio-1].setRang = null; 
+                cap=(TCP)tripulant;
+                tripulacio[posicioTripulacio-1].setRang(null); 
             }
         }
         
@@ -296,33 +296,10 @@ public class Vol implements Component{
         System.out.println("\nLa tripulació és:");
         for (int i = 0; i < posicioTripulacio; i++) {
             if (tripulacio[i] != null) {
-                tripulacio[i].mostrarTripulantCabina();
+                tripulacio[i].mostrarComponent();
             }
         }
 
         System.out.println("\nDurada: " + durada);
-    }
-    
-    public Object demanarDades(String peticio, int tipus) {      
-        Object item = new Object();
-        
-        System.out.println(peticio);
-
-        switch (tipus){
-            case 1:
-                item = DADES.nextInt();
-                break;
-            case 2:
-                item = DADES.next();
-                break;
-            case 3:
-                item = DADES.nextDouble();
-                break;
-            case 4:
-                item = DADES.nextLine();
-                break;
-        }
-        
-        return item;                
     }
 }
