@@ -109,7 +109,7 @@ public class Aplicacio {
         } while (opcio != 0);
     }
 
-    public static void menuCompanyes() {
+    public static void menuCompanyes() throws ParseException {
         int opcio = 0;
 
         do {
@@ -202,24 +202,24 @@ public class Aplicacio {
                     case 2:
                         int pos;
                         if (tipus==1){
-                            pos = companyiaActual.seleccionarComponent(1, "codi");
+                            pos = companyiaActual.seleccionarComponent(1, null);
                         }
                         if (tipus<6){
-                            pos = companyiaActual.seleccionarComponent(2, "codi");
+                            pos = companyiaActual.seleccionarComponent(2, null);
                         }
                         else {
-                            pos = companyiaActual.seleccionarComponent(3, "passaport");
+                            pos = companyiaActual.seleccionarComponent(3, null);
                         }
                         
                         if (pos >= 0) {
-                            companyiaActual.getComponent()[pos].modificarComponent();
+                            companyiaActual.getComponents()[pos].modificarComponent();
                         } else {
                             System.out.println("\nNo existeix aquest component");
                         }
                         break;
                     case 3:
-                        for (int i = 0; i < companyiaActual.getPosicioAvions(); i++) {
-                            companyiaActual.getAvions()[i].mostrarComponent();
+                        for (int i = 0; i < companyiaActual.getPosicioComponents(); i++) {
+                            companyiaActual.getComponents()[i].mostrarComponent();
                         }
                         break;
                     default:
@@ -248,9 +248,9 @@ public class Aplicacio {
                     companyiaActual.afegirVol();
                     break;
                 case 2:
-                    int pos = companyiaActual.seleccionarComponent(4, "codi");
+                    int pos = companyiaActual.seleccionarComponent(4, null);
                     if (pos >= 0) {
-                        companyiaActual.getComponent()[pos].modificarComponent();
+                        companyiaActual.getComponents()[pos].modificarComponent();
                     } else {
                         System.out.println("\nNo existeix aquest vol");
                     }
@@ -279,8 +279,8 @@ public class Aplicacio {
                     }
                     break;
                 case 6:
-                    for (int i = 0; i < companyiaActual.getPosicioVols(); i++) {
-                        companyiaActual.getComponent()[i].mostrarComponent();
+                    for (int i = 0; i < companyiaActual.getPosicioComponents(); i++) {
+                        companyiaActual.getComponents()[i].mostrarComponent();
                     }
                     break;
                 default:
