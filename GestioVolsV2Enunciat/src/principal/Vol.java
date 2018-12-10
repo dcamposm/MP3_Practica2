@@ -266,8 +266,8 @@ public class Vol implements Component{
         String i;        
         
         if (tripulant instanceof TCP){
-            i = (String)demanarDades("Vols que aquet tripulant sigui cap de cabina? (S/N)",2);
-            if (i.equals("S")){
+            i = (String)demanarDades("Vols que aquet tripulant sigui cap de cabina? (si/no)",2);
+            if (i.equals("si")){
                 tripulant.setRang("cap");
                 cap=(TCP)tripulant;
                 tripulacio[posicioTripulacio-1].setRang(null); 
