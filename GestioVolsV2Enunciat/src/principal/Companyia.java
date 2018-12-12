@@ -132,8 +132,10 @@ public class Companyia implements Component{
      */
     public void modificarComponent() throws ParseException {
 
+        System.out.println("\nCodi de la companyia: " + codi);
+        codi = (int)demanarDades("\nQuin és el nou codi de la companyia?", 1);
         System.out.println("\nNom de la companyia: " + nom);
-        demanarDades("\nQuin és el nou nom de la companyia?", 4);
+        nom = (String)demanarDades("\nQuin és el nou nom de la companyia?", 4);
 
     }
 
@@ -286,7 +288,7 @@ public class Companyia implements Component{
         }
     }
     
-    public void afegirVol() {
+    public void afegirVol() throws ParseException {
         Vol newVol = Vol.nouVol();
         if (seleccionarComponent(4, newVol.getCodi()) == -1) {
             components[posicioComponents] = newVol;
@@ -298,16 +300,16 @@ public class Companyia implements Component{
     
     public void afegirAvioVol() {
         Vol volSel;
-        int pos = seleccionarVol();
+        int pos = seleccionarComponent(4, null);
 
         if (pos >= 0) {
 
-            volSel = getVols()[pos];
+            volSel = (Vol)getComponents()[pos];
 
-            pos = seleccionarAvio();
+            pos = seleccionarComponent(1, null);
 
             if (pos >= 0) {
-                volSel.setAvio(getAvions()[pos]);
+                volSel.setAvio((Avio)getComponents()[pos]);
             } else {
                 System.out.println("\nNo existeix aquest avió");
             }
@@ -316,88 +318,83 @@ public class Companyia implements Component{
             System.out.println("\nNo existeix aquest vol");
         }
     }
-
-    public void afegirTripulantCabinaVol() {
-        Vol volSel;
-        int pos = seleccionarVol();
-
-        if (pos >= 0) {
-
-            volSel = getVols()[pos];
-
-            pos = seleccionarTripulantCabina();
-
-            if (pos >= 0) {
-                volSel.afegirTripulantCabina(getTripulantsCabina()[pos]);
-            } else {
-                System.out.println("\nNo existeix aquest tripulant de cabina");
-            }
-
-        } else {
-            System.out.println("\nNo existeix aquest vol");
-        }
-    }
     
-    public void afegirTCPVol() {
-        Vol volSel;
-        int pos = seleccionarVol();
-
-        if (pos >= 0) {
-
-            volSel = getVols()[pos];
-
-            pos = seleccionarTCP();
-
+    public void afegirTripulantVol (int tipus) {
+        
+            Vol volSel;
+            
+            int pos = seleccionarComponent(4, null);
+            
             if (pos >= 0) {
-                volSel.afegirTCP(getTcps()[pos]);
-            } else {
-                System.out.println("\nNo existeix aquest tripulant de cabina de passatgers");
-            }
+            
+            volSel = (Vol)getComponents()[pos];
+            
+            pos = seleccionarComponent(3, null);
+            
+                switch (tipus) {
 
-        } else {
-            System.out.println("\nNo existeix aquest vol");
-        }
+                    case 6: {
+
+                            if (pos >= 0) {
+                                volSel.afegirTripulant((TripulantCabina)getComponents()[pos]);
+                            } else {
+                                System.out.println("\nNo existeix aquest tripulant de cabina");
+                            }
+
+
+                    } break;
+
+                    case 7: {
+
+                            if (pos >= 0) {
+                                volSel.afegirTripulant((TCP)getComponents()[pos]);
+                            } else {
+                                System.out.println("\nNo existeix aquest tripulant de cabina de passatgers");
+                            }
+
+
+                    } break;
+
+                }
+                
+            } else {
+                System.out.println("\nNo existeix aquest vol");
+            }
     }
 
     public void afegirRutaVol(int tipus) {
         Vol volSel;
-        int pos = seleccionarVol();
+        int pos = seleccionarComponent(4, null);
 
         if (pos >= 0) {
 
-            volSel = getVols()[pos];
+            volSel = (Vol)getComponents()[pos];
+            
+            pos = seleccionarComponent(2, null);
 
             switch (tipus) {
-                case 1:
-                    pos = seleccionarRutaNacional();
-                    if (pos >= 0) {
-                        volSel.setRuta(getRutesNacionals()[pos]);
-                    }
-                    break;
                 case 2:
-                    pos = seleccionarRutaInternacional();
                     if (pos >= 0) {
-                        volSel.setRuta(getRutesInternacionals()[pos]);
+                        volSel.setRuta((RutaNacional)getComponents()[pos]);
                     }
                     break;
                 case 3:
-                    pos = seleccionarRutaIntercontinental();
                     if (pos >= 0) {
-                        volSel.setRuta(getRutesIntercontinentals()[pos]);
+                        volSel.setRuta((RutaInternacional)getComponents()[pos]);
                     }
                     break;
-                default:
-                    pos = seleccionarRutaTransoceanica();
+                case 4:
                     if (pos >= 0) {
-                        volSel.setRuta(getRutesTransoceaniques()[pos]);
+                        volSel.setRuta((RutaIntercontinental)getComponents()[pos]);
                     }
                     break;
-            }
-
-            if (pos < 0) {
-                System.out.println("\nNo existeix aquesta ruta");
-            } else{                
-                volSel.setTipusRuta(tipus);
+                case 5:
+                    if (pos >= 0) {
+                        volSel.setRuta((RutaTransoceanica)getComponents()[pos]);
+                    }
+                    break;
+                default: System.out.println("\nNo existeix aquesta ruta");
+                    
             }
             
         } else {
